@@ -1,23 +1,32 @@
 graph TB
-  INET[Internet] --- FWA[FW-A]
-  subgraph SITEA [Building A - head office and IT]
-    FWA --- CCA[CC-A]
-    SRV[IT servers VLAN 25] --- CCA
-    DMZ[DMZ VLAN 60] --- FWA
-    CCA --- A1[ACC-A-01]
-    CCA --- A2[ACC-A-02]
-    CCA --- A3[ACC-A-03]
-    CCA --- A4[ACC-A-04]
-    CCA --- A5[ACC-A-05]
-    CCA --- A6[ACC-A-06]
+  subgraph SITEA [Building A]
+    FWA[FW-A]
+    CCA[CC-A]
+    A1[ACC-A-01]
+    A2[ACC-A-02]
+    A3[ACC-A-03]
+    A4[ACC-A-04]
+    A5[ACC-A-05]
+    A6[ACC-A-06]
   end
-  subgraph SITEB [Building B - production]
-    FWB[FW-B] --- CCB[CC-B]
-    OT[OT VRF: PLCs VLAN 50, supervision VLAN 51] --- CCB
-    CCB --- B1[ACC-B-01]
-    CCB --- B2[ACC-B-02]
-    CCB --- B3[ACC-B-03]
-    CCB --- B4[ACC-B-04]
+  subgraph SITEB [Building B]
+    FWB[FW-B]
+    CCB[CC-B]
+    B1[ACC-B-01]
+    B2[ACC-B-02]
+    B3[ACC-B-03]
+    B4[ACC-B-04]
   end
-  CCA ===|Fibre 1| CCB
-  CCA ===|Fibre 2| CCB
+  FWA --- CCA
+  FWB --- CCB
+  CCA === CCB
+  CCA --- A1
+  CCA --- A2
+  CCA --- A3
+  CCA --- A4
+  CCA --- A5
+  CCA --- A6
+  CCB --- B1
+  CCB --- B2
+  CCB --- B3
+  CCB --- B4
